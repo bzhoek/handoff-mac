@@ -9,9 +9,12 @@ class ViewController: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    keyStore = NSUbiquitousKeyValueStore()
+    keyStore = NSUbiquitousKeyValueStore.default
 
-    NotificationCenter.default.addObserver(self, selector: #selector(onUbiquitousKeyValueStoreDidChangeExternally(notification:)), name: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: keyStore)
+    NotificationCenter.default.addObserver(
+      self, selector: #selector(onUbiquitousKeyValueStoreDidChangeExternally(notification:)),
+      name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
+      object: keyStore)
   }
 
   @objc func onUbiquitousKeyValueStoreDidChangeExternally(notification: Notification) {
@@ -46,8 +49,6 @@ class ViewController: NSViewController {
     super.updateUserActivityState(userActivity)
 
     userActivity.addUserInfoEntries(from: ["Time": NSDate()])
-
-    // kan ook iCloud file URL
   }
 
 }
